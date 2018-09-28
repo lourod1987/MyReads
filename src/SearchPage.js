@@ -29,8 +29,8 @@ export class SearchPage extends Component {
                     </form>
                     {JSON.stringify(query)}
                     <h2>Search Results</h2>
-                    {(searchResults === []) ? (
-                        <h3>No search result found</h3>) : (
+                    {(searchResults === undefined) ? 
+                    <h3>No search results found</h3> : (
                         <ul>
                             {searchResults.map( book => (
                                 <li key={book.id}>
