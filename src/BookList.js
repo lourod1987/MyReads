@@ -4,18 +4,18 @@ import PropTypes from 'prop-types';
 export class BookList extends Component {
 
     static propTypes = {
-        books: PropTypes.array.isRequired,
+        allMyBooks: PropTypes.array.isRequired,
         handleClick: PropTypes.func.isRequired,
         handleFilter: PropTypes.func.isRequired,
         shelfFilter: PropTypes.string.isRequired,
     }
 
     render() {
-        const { books, handleClick, handleFilter, shelfFilter } = this.props;
+        const { allMyBooks, handleClick, handleFilter, shelfFilter } = this.props;
 
         return (
             <ul>
-            {handleFilter(books, shelfFilter).map( (book) => (
+            {handleFilter(allMyBooks, shelfFilter).map( (book) => (
                 <li key={book.id}>
                     <figure>
                         {book.imageLinks !== undefined && (
