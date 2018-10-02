@@ -8,7 +8,10 @@ export class MyBooksApp extends Component {
     state = {
         query: '',
         shelf: '',
-        books: [],
+        allMyBooks: [],
+        currentReads: [],
+        wantReads: [],
+        doneReads: [],
         bookPut: {},
         searchResults: []
     }
@@ -27,6 +30,31 @@ export class MyBooksApp extends Component {
         })
     }
 
+    shelfAssign = (allMyBooks) => {
+       const curReads = allMyBooks.filter( book => (
+            book.shelf === 'currentlyReading'
+        ));
+       
+        const wantReads = allMyBooks.filter( book => (
+            book.shelf === 'wantToRead'
+        ));
+        
+        const read = allMyBooks.filter( book => (
+            book.shelf === 'read'
+        ));
+        
+        this.setState({ 
+            currentReads: curReads,
+            wantReads: wantReads,
+            doneReads: read
+         })
+
+         console.log(this.state.doneReads);
+        // const none = allMyBooks.filter( book => (
+        //     book.shelf === undefined
+        // ));
+    }
+
     handleShelf = (bookPut, shelf) => {
         // console.log(bookPut);
         // let newBooks = books;
@@ -40,26 +68,29 @@ export class MyBooksApp extends Component {
         // })
 
         BooksAPI.getAll().then( books => {
-            this.setState({ books })
+            this.setState({ allMyBooks: books })
         })
     }
 
     componentDidMount() {
-        BooksAPI.getAll().then( books => {
-            this.setState({ books })
-            // console.log(books)
+        BooksAPI.getAll().then( allMyBooks => {
+            this.setState({ allMyBooks });
+            this.shelfAssign(allMyBooks);
         })
-            
+        // console.log(this.state.allMyBooks);
     }
     
     render() {
-        const { books, query, shelf, searchResults, bookPut } = this.state;
+        const { allMyBooks, currentReads, wantReads, doneReads, query, shelf, searchResults, bookPut } = this.state;
 
         return (
             <div>
                 <Route exact path="/" render={() => (
                     <MyBooksPage
-                        books={books}
+                        allMyBooks={allMyBooks}
+                        currentReads={currentReads}
+                        wantReads={wantReads}
+                        doneReads={doneReads}
                         bookPut={bookPut}
                         shelf={shelf}
                         handleShelf={this.handleShelf}
@@ -71,7 +102,7 @@ export class MyBooksApp extends Component {
                         query={query}
                         onChange={ evt => this.handleSearch(evt.target.value) } 
                         searchResults={searchResults}
-                        books={books}
+                        allMyBooks={allMyBooks}
                         handleShelf={this.handleShelf} 
                     />
                 )}/>
