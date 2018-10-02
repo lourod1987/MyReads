@@ -5,15 +5,15 @@ import { BookList } from './BookList';
 
 export class MyBooksPage extends Component {
     static propTypes = {
-        books: PropTypes.array.isRequired,
+        allMyBooks: PropTypes.array.isRequired,
         handleShelf: PropTypes.func.isRequired,
     }
 
-    handleClick = (id, newShelf, books) => {
+    handleClick = (id, newShelf) => {
         let bookIndex;
-        for (let i = 0; i < this.props.books.length; i++) {
-            if (this.props.books[i].id === id) {
-                bookIndex = this.props.books[i];
+        for (let i = 0; i < this.props.allMyBooks.length; i++) {
+            if (this.props.allMyBooks[i].id === id) {
+                bookIndex = this.props.allMyBooks[i];
             }
         }
         
@@ -29,7 +29,7 @@ export class MyBooksPage extends Component {
     }
 
     render() {
-        const { books, handleShelf } = this.props;
+        const { allMyBooks, handleShelf } = this.props;
 
         return (
             <div className="App">
@@ -42,7 +42,7 @@ export class MyBooksPage extends Component {
                 <main>
                     <h2>Currently Reading</h2>
                     <BookList
-                        books={books}
+                        allMyBooks={allMyBooks}
                         handleShelf={handleShelf}
                         handleClick={this.handleClick}
                         handleFilter={this.handleFilter}
@@ -50,7 +50,7 @@ export class MyBooksPage extends Component {
                     />
                     <h2>Want to Read</h2>
                     <BookList
-                        books={books}
+                        allMyBooks={allMyBooks}
                         handleShelf={this.handleShelf}
                         handleClick={this.handleClick}
                         handleFilter={this.handleFilter}
@@ -59,7 +59,7 @@ export class MyBooksPage extends Component {
                     
                     <h2>Done Reading</h2>
                     <BookList
-                            books={books}
+                            allMyBooks={allMyBooks}
                             handleShelf={this.handleShelf}
                             handleClick={this.handleClick}
                             handleFilter={this.handleFilter}
