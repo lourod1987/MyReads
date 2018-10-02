@@ -27,26 +27,21 @@ export class MyBooksApp extends Component {
         })
     }
 
-    handleShelf = (bookPut, shelf, books) => {
+    handleShelf = (bookPut, shelf) => {
         // console.log(bookPut);
         // let newBooks = books;
-        BooksAPI.update(bookPut, shelf).then(books => {
+        BooksAPI.update(bookPut, shelf)
+        // .then(books => {
             // books = this.state.books;
-            console.log(books)
+            // console.log(books)
             // this.setState({
             //     books: books
             // });
-        })
+        // })
 
         BooksAPI.getAll().then( books => {
             this.setState({ books })
         })
-
-        // return books;
-        // .then( (bookPut) => {
-            // this.setState({
-            //     books: newBooks
-            // });
     }
 
     componentDidMount() {
