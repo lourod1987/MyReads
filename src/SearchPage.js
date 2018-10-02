@@ -5,17 +5,17 @@ import PropTypes from 'prop-types';
 export class SearchPage extends Component {
     //add a function that checks if getAll books.id matches searchResults book.id, if yes add shelf property to searchResults book with correct value
     static propTypes = {
-        books: PropTypes.array.isRequired,
+        allMyBooks: PropTypes.array.isRequired,
         searchResults: PropTypes.array.isRequired,
         query: PropTypes.string.isRequired,
         onChange: PropTypes.func.isRequired
     }
 
-    shelfAdd = (searchResults, books) => {
-        for (let i = 0; i < books.length; i++) {
+    shelfAdd = (searchResults, allMyBooks) => {
+        for (let i = 0; i < allMyBooks.length; i++) {
             for (let j = 0; j < searchResults.length; j++) {
-                if (books[i].id === searchResults[j].id) {
-                    searchResults[j].shelf = books[i].shelf;
+                if (allMyBooks[i].id === searchResults[j].id) {
+                    searchResults[j].shelf = allMyBooks[i].shelf;
                     // console.log(searchResults[j].shelf);
                     // console.log(searchResults);
                 }
@@ -34,11 +34,11 @@ export class SearchPage extends Component {
         
         console.log(bookIndex);
         this.props.handleShelf(bookIndex, newShelf);
-        this.shelfAdd(this.props.searchResults, this.props.books);
+        this.shelfAdd(this.props.searchResults, this.props.allMyBooks);
     }
 
     render() {
-        const { searchResults, books, query, onChange } = this.props
+        const { searchResults, allMyBooks, query, onChange } = this.props
         
         return (
             <div className="App">
@@ -62,7 +62,7 @@ export class SearchPage extends Component {
                     {(searchResults.length === 0) ? 
                     <h3>No matches found for your search</h3> : (
                         <ul>
-                            {this.shelfAdd(searchResults, books).map( book => (
+                            {this.shelfAdd(searchResults, allMyBooks).map( book => (
                                 <li key={book.id}>
                                     <figure>
                                         {book.imageLinks !== undefined && (
