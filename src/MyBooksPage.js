@@ -18,7 +18,7 @@ export class MyBooksPage extends Component {
         }
         
         // console.log(bookIndex);
-        this.props.handleShelf(bookIndex, newShelf, books);
+        this.props.handleShelf(bookIndex, newShelf);
         // this.handleFilter(this.props.books, newShelf)
     }
 
