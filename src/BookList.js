@@ -29,18 +29,18 @@ export class BookList extends Component {
                             <button className="dropbtn">+</button>
                             <div className="dropdown-content">
                                 <a
-                                    onClick={() => handleClick(book.id, 'currentlyReading', books)}
+                                    onClick={() => handleClick(book.id, 'currentlyReading')}
                                     className={(book.shelf === 'currentlyReading') ? "highlight" : ""}>Currently Reading</a>
                                 <a
-                                    onClick={() => handleClick(book.id, 'wantToRead', books)}
+                                    onClick={() => handleClick(book.id, 'wantToRead')}
                                     className={(book.shelf === 'wantToRead') ? "highlight" : ""}
                                 >Want to Read</a>
                                 <a
-                                    onClick={() => handleClick(book.id, 'read', books)}
+                                    onClick={() => handleClick(book.id, 'read')}
                                     className={(book.shelf === 'read') ? "highlight" : ""}>Done Reading</a>
                                 <a 
-                                    onClick={() => handleClick(book.id, 'undefined', books)}
-                                    className={(book.shelf === undefined) ? "highlight" : ""}>None</a>
+                                    onClick={() => handleClick(book.id, 'undefined')}
+                                    className={(book.shelf === undefined || book.shelf === '') ? "highlight" : ""}>None</a>
                             </div>
                         </div>
                         <figcaption className="book-cover-title">
