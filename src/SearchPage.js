@@ -54,7 +54,6 @@ export class SearchPage extends Component {
                             onChange={onChange}
                         />
                     </form>
-                    {JSON.stringify(query)}
                     <h2>Search Results</h2>
                     {(searchResults.length === 0) ? 
                     <h3>No matches found for your search</h3> : (
