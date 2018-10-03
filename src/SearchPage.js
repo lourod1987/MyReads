@@ -5,10 +5,11 @@ import PropTypes from 'prop-types';
 export class SearchPage extends Component {
     //add a function that checks if getAll books.id matches searchResults book.id, if yes add shelf property to searchResults book with correct value
     static propTypes = {
-        allMyBooks: PropTypes.array.isRequired,
-        searchResults: PropTypes.array.isRequired,
         query: PropTypes.string.isRequired,
-        onChange: PropTypes.func.isRequired
+        onChange: PropTypes.func.isRequired,
+        searchResults: PropTypes.array.isRequired,
+        allMyBooks: PropTypes.array.isRequired,
+        handleShelf: PropTypes.func.isRequired
     }
 
     shelfAdd = (searchResults, allMyBooks) => {
@@ -16,8 +17,6 @@ export class SearchPage extends Component {
             for (let j = 0; j < searchResults.length; j++) {
                 if (allMyBooks[i].id === searchResults[j].id) {
                     searchResults[j].shelf = allMyBooks[i].shelf;
-                    // console.log(searchResults[j].shelf);
-                    // console.log(searchResults);
                 }
             }
         }
@@ -32,9 +31,7 @@ export class SearchPage extends Component {
             }
         }
         
-        // console.log(bookIndex);
         this.props.handleShelf(bookIndex, newShelf);
-        // this.shelfAdd(this.props.searchResults, this.props.allMyBooks);
     }
 
     render() {
@@ -87,7 +84,6 @@ export class SearchPage extends Component {
                                                 <a
                                                     onClick={() => this.handleClick(book.id, 'undefined')} 
                                                     className={(book.shelf === undefined || book.shelf === '') ? "highlight" : ""}>None</a>
-                                                    {console.log(book.shelf)}
                                             </div>
                                         </div>
                                         <figcaption className="book-cover-title">
