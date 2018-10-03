@@ -1,6 +1,6 @@
 # Book Reads App
 
-This application is for tracking books a user is reading, wants to read, or has read. The React application allows users to search new books and add them to one of their shelves.
+This application is for tracking books a user is reading, wants to read, or has read. The React application allows users to search for new books and add them to one of their shelves.
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
