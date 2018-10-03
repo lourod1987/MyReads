@@ -17,7 +17,7 @@ You can find the most recent and full version of the Create React App guide [her
     * CD into the directory where the root folder of the application is and run 'npm install' in your terminal or cmd line.
 3)
     * Now run 'npm start' to run a live version of the application in development mode.
-      * This will automatically open a new window in your default at [http://localhost:3000](http://localhost:3000).
+      * This will automatically open a new window in your default browser at [http://localhost:3000](http://localhost:3000).
 4)
     * Alternatively you can visit the live link to this app [here](https://dazzling-shirley-f40879.netlify.com/).
 
