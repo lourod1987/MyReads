@@ -14,7 +14,7 @@ export class BookList extends Component {
         
         return (
             <div>
-            {(handleFilter(shelfFilter) === undefined) ? 
+            {(handleFilter(shelfFilter).length === 0) ? 
                 <h3>None</h3> : (
                 <ul>
                 {handleFilter(shelfFilter).map( (book) => (
