@@ -32,9 +32,9 @@ export class SearchPage extends Component {
             }
         }
         
-        console.log(bookIndex);
+        // console.log(bookIndex);
         this.props.handleShelf(bookIndex, newShelf);
-        this.shelfAdd(this.props.searchResults, this.props.allMyBooks);
+        // this.shelfAdd(this.props.searchResults, this.props.allMyBooks);
     }
 
     render() {
