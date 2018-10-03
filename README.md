@@ -28,7 +28,7 @@ Books will appear on the main page in their associated shelves.
 You can change a books shelf by hovering over the ' + ' button and clicking on the drop down item you wish the book to move to.
 
 Clicking on the search link at the top of the page will take you to the Search page where you can search for new books.
-  * **Note:** that search queries are limited to the allowed terms found in [SEARCH_TERMS.md](SEARCH_TERMS.md).
+  * **Note:** search queries are limited to the allowed terms found in [SEARCH_TERMS.md](SEARCH_TERMS.md).
 
 
 ## Table of Contents
