@@ -15,16 +15,20 @@ export class MyBooksApp extends Component {
     }
 
     handleSearch = query => {
-        this.setState({ query: query })
-        BooksAPI.search(query).then( searchResults => {
-            if (searchResults !== undefined && searchResults.error !== 'empty query') {
-                this.setState({ searchResults }); 
-            }
-            
-            if (searchResults === undefined || searchResults.error === 'empty query') {
-                this.setState({ searchResults: [] });
-            }
-        });
+        this.setState({ query: query });
+        if (query !== '') {
+            BooksAPI.search(query).then( searchResults => {
+                if (searchResults !== undefined && searchResults.error !== 'empty query') {
+                    this.setState({ searchResults }); 
+                }
+                
+                if (searchResults === undefined || searchResults.error === 'empty query') {
+                    this.setState({ searchResults: [] });
+                }
+            });
+        } else {
+            this.setState({ searchResults: [] });
+        }
     }
 
     handleShelf = (bookPut, shelf) => {
@@ -82,6 +86,7 @@ export class MyBooksApp extends Component {
                         }
                     }
                 }
+
 
                 if (shelf === 'undefined') {
                     bookPut.shelf = undefined;    
