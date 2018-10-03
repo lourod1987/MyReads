@@ -26,58 +26,113 @@ export class MyBooksApp extends Component {
             if (searchResults === undefined || searchResults.error === 'empty query') {
                 this.setState({ searchResults: [] });
             }
-            
         })
-    }
-
-    shelfAssign = (allMyBooks) => {
-       const curReads = allMyBooks.filter( book => (
-            book.shelf === 'currentlyReading'
-        ));
-       
-        const wantReads = allMyBooks.filter( book => (
-            book.shelf === 'wantToRead'
-        ));
-        
-        const read = allMyBooks.filter( book => (
-            book.shelf === 'read'
-        ));
-        
-        this.setState({ 
-            currentReads: curReads,
-            wantReads: wantReads,
-            doneReads: read
-         })
-
-         console.log(this.state.doneReads);
-        // const none = allMyBooks.filter( book => (
-        //     book.shelf === undefined
-        // ));
     }
 
     handleShelf = (bookPut, shelf) => {
         // console.log(bookPut);
-        // let newBooks = books;
         BooksAPI.update(bookPut, shelf)
-        // .then(books => {
-            // books = this.state.books;
-            // console.log(books)
-            // this.setState({
-            //     books: books
-            // });
-        // })
+            .then(bookReply => {
+                // console.log(bookReply)
+                const { allMyBooks, searchResults } = this.state
+                
+                for (let i = 0; i < bookReply.currentlyReading.length; i++) {
+                    for (let j = 0; j < allMyBooks.length; j++){
+                        if (bookReply.currentlyReading[i] === allMyBooks[j].id) {
+                            bookReply.currentlyReading[i] = allMyBooks[j];
+                            bookReply.currentlyReading[i].shelf = 'currentlyReading';
+                            // console.log(bookReply.currentlyReading[i]);
+                        }
+                    }
+                }
+                for (let i = 0; i < bookReply.wantToRead.length; i++) {
+                    for (let j = 0; j < allMyBooks.length; j++){
+                        if (bookReply.wantToRead[i] === allMyBooks[j].id) {
+                            bookReply.wantToRead[i] = allMyBooks[j];
+                            bookReply.wantToRead[i].shelf = 'wantToRead';
+                            // console.log(bookReply.wantToRead[i]);
+                        }
+                    }
+                }
+                for (let i = 0; i < bookReply.read.length; i++) {
+                    for (let j = 0; j < allMyBooks.length; j++){
+                        if (bookReply.read[i] === allMyBooks[j].id) {
+                            bookReply.read[i] = allMyBooks[j];
+                            bookReply.read[i].shelf = 'read';
+                            // console.log(bookReply.read[i]);
+                        }
+                    }
+                }
 
-        BooksAPI.getAll().then( books => {
-            this.setState({ allMyBooks: books })
-        })
+                for (let i = 0; i < bookReply.currentlyReading.length; i++) {
+                    for (let j = 0; j < searchResults.length; j++){
+                        if (bookReply.currentlyReading[i] === searchResults[j].id) {
+                            bookReply.currentlyReading[i] = searchResults[j];
+                            bookReply.currentlyReading[i].shelf = 'currentlyReading';
+                            // console.log(bookReply.currentlyReading[i]);
+                        }
+                    }
+                }
+                for (let i = 0; i < bookReply.wantToRead.length; i++) {
+                    for (let j = 0; j < searchResults.length; j++){
+                        if (bookReply.wantToRead[i] === searchResults[j].id) {
+                            bookReply.wantToRead[i] = searchResults[j];
+                            bookReply.wantToRead[i].shelf = 'wantToRead';
+                            // console.log(bookReply.wantToRead[i]);
+                        }
+                    }
+                }
+                for (let i = 0; i < bookReply.read.length; i++) {
+                    for (let j = 0; j < searchResults.length; j++){
+                        if (bookReply.read[i] === searchResults[j].id) {
+                            bookReply.read[i] = searchResults[j];
+                            bookReply.read[i].shelf = 'read';
+                            // console.log(bookReply.read[i]);
+                        }
+                    }
+                }
+                BooksAPI.getAll().then( books => {
+                    this.setState({ allMyBooks: books })
+                })
+
+                this.setState({
+                    currentReads: bookReply.currentlyReading,
+                    wantReads: bookReply.wantToRead,
+                    doneReads: bookReply.read
+                });
+            })
+
     }
 
     componentDidMount() {
         BooksAPI.getAll().then( allMyBooks => {
             this.setState({ allMyBooks });
-            this.shelfAssign(allMyBooks);
+            // this.shelfAssign(allMyBooks);
+            // console.log(this.state.allMyBooks);
+            const curReads = this.state.allMyBooks.filter( book => (
+                book.shelf === 'currentlyReading'
+            ));
+           
+            const wantReads = this.state.allMyBooks.filter( book => (
+                book.shelf === 'wantToRead'
+            ));
+            
+            const read = this.state.allMyBooks.filter( book => (
+                book.shelf === 'read'
+            ));
+
+             // const none = allMyBooks.filter( book => (
+        //     book.shelf === undefined
+        // ));
+            
+            this.setState({ 
+                currentReads: curReads,
+                wantReads: wantReads,
+                doneReads: read
+             })
+            
+            //  console.log(this.state.wantReads);
         })
-        // console.log(this.state.allMyBooks);
     }
     
     render() {
