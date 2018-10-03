@@ -22,14 +22,33 @@ export class MyBooksPage extends Component {
         // this.handleFilter(this.props.books, newShelf)
     }
 
-    handleFilter = (books, filter) => {
-        return books.filter( book => (
-            book.shelf === filter
-        ));
+    // handleFilter = (books, filter) => {
+    //     return books.filter( book => (
+    //         book.shelf === filter
+    //     ));
+    // }
+
+    handleFilter = (filter) => {
+        let booklist;
+
+        switch (filter) {
+            case 'currentlyReading':
+                booklist = this.props.currentReads;
+                break;
+            case 'wantToRead':
+                booklist = this.props.wantReads;
+                break;
+            case 'read':
+                booklist = this.props.doneReads;
+                break;
+            default:
+                booklist = null;
+        }
+     
+        return booklist;
     }
 
     render() {
-        const { allMyBooks, handleShelf } = this.props;
 
         return (
             <div className="App">
@@ -42,16 +61,12 @@ export class MyBooksPage extends Component {
                 <main>
                     <h2>Currently Reading</h2>
                     <BookList
-                        allMyBooks={allMyBooks}
-                        handleShelf={handleShelf}
                         handleClick={this.handleClick}
                         handleFilter={this.handleFilter}
                         shelfFilter="currentlyReading"
                     />
                     <h2>Want to Read</h2>
                     <BookList
-                        allMyBooks={allMyBooks}
-                        handleShelf={this.handleShelf}
                         handleClick={this.handleClick}
                         handleFilter={this.handleFilter}
                         shelfFilter="wantToRead"
@@ -59,8 +74,6 @@ export class MyBooksPage extends Component {
                     
                     <h2>Done Reading</h2>
                     <BookList
-                            allMyBooks={allMyBooks}
-                            handleShelf={this.handleShelf}
                             handleClick={this.handleClick}
                             handleFilter={this.handleFilter}
                             shelfFilter="read"
