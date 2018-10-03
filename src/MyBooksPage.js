@@ -6,7 +6,10 @@ import { BookList } from './BookList';
 export class MyBooksPage extends Component {
     static propTypes = {
         allMyBooks: PropTypes.array.isRequired,
-        handleShelf: PropTypes.func.isRequired,
+        currentReads: PropTypes.array.isRequired,
+        wantReads: PropTypes.array.isRequired,
+        doneReads: PropTypes.array.isRequired,
+        handleShelf: PropTypes.func.isRequired
     }
 
     handleClick = (id, newShelf) => {
@@ -17,16 +20,8 @@ export class MyBooksPage extends Component {
             }
         }
         
-        // console.log(bookIndex);
         this.props.handleShelf(bookIndex, newShelf);
-        // this.handleFilter(this.props.books, newShelf)
     }
-
-    // handleFilter = (books, filter) => {
-    //     return books.filter( book => (
-    //         book.shelf === filter
-    //     ));
-    // }
 
     handleFilter = (filter) => {
         let booklist;
