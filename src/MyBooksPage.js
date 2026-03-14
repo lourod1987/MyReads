@@ -48,9 +48,13 @@ export class MyBooksPage extends Component {
         return (
             <div className="App">
                 <header className="App-header">
+                <div>
+                    <a href="https://luisdev.netlify.app/" title="Back to Portfolio"><button id="backtohome">Back to Portfolio</button></a>
+                </div>
                     <h1 className="App-title">My Reads Library</h1>
                     <Link
                         to="/search"
+                        className="search"
                     >Search</Link>
                 </header>
                 <main>
